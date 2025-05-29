@@ -5,14 +5,14 @@ export default {
 		extend: {
 			colors: {
 				// primary: 'rgb(243 0 71 / <alpha-value>)',
-				primary: 'rgb(220 51 74 / <alpha-value>)',
-				secondary: 'rgb(255 229 0 / <alpha-value>)',
-				tertiary: 'rgb(0 175 152 / <alpha-value>)',
-				surface: 'rgb(74 48 68 / <alpha-value>)'
+				primary: 'rgb(243 239 248 / <alpha-value>)',
+				secondary: 'rgb(42 159 168 / <alpha-value>)',
+				tertiary: 'rgb(94 73 85 / <alpha-value>)',
+				surface: 'rgb(42 43 42 / <alpha-value>)'
 			}
 		},
 	},
 	plugins: [
-		require('@tailwindcss/typography')
+		import('@tailwindcss/typography')
 	],
 }

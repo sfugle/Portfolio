@@ -1,11 +1,15 @@
 /* Global Styles --- */
 
 body {
-  @apply bg-surface text-white overflow-x-hidden;
+  @apply bg-surface text-primary overflow-x-hidden;
+}
+
+#about {
+  @apply !bg-secondary text-primary overflow-x-hidden;
 }
 
 *:focus {
-  @apply outline-2 outline-offset-[5px] outline-white/10;
+  @apply outline-2 outline-offset-[5px] outline-secondary/10;
 }
 
 /* Typography --- */
@@ -22,20 +26,20 @@ h1 {
   @apply text-secondary text-4xl md:text-6xl;
 }
 h2 {
-  @apply text-white text-3xl md:text-5xl font-black uppercase;
+  @apply text-3xl md:text-5xl font-black uppercase;
 }
 h3 {
   @apply text-white text-xl md:text-3xl font-light uppercase;
 }
 
 .anchor {
-  @apply opacity-75 hover:opacity-100;
+  @apply opacity-75 hover:opacity-100 text-secondary;
 }
 
 /* Elements --- */
 
 .btn {
-  @apply inline-block bg-secondary text-black px-6 py-2 rounded-tr-lg rounded-bl-lg;
+  @apply inline-block bg-secondary text-primary px-6 py-2 rounded-tr-lg rounded-bl-lg;
   @apply hover:brightness-110;
 }
 

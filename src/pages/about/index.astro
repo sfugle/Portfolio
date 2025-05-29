@@ -2,11 +2,11 @@
 import LayoutPage from "@layouts/LayoutPage.astro";
 
 const resumeLink =
-  "https://docs.google.com/document/d/e/2PACX-1vTXIHHD4NuQLXrSOJheUW6R-fJIKDrvt0R8VE5o9E1VmP7jTYybQziw01PC45jvAtM3-WP9CzqyRjXc/pub?embedded=true";
+  "https://docs.google.com/document/d/e/2PACX-1vSZm44ZD6G9ki-PgF-TDw9NuNFCfx-_H5DLBr8FWd9qMfHP4h1LiMUjNKLZlg2EGIb2PQlbHLA7O68J/pub?embedded=true";
 ---
 
 <LayoutPage>
-  <main class="p-4 py-12 md:py-24">
+  <main class="p-4 py-12 md:py-24 about">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-[48px_auto_1fr] gap-4 md:gap-8">
         <!-- Heading -->
@@ -89,7 +89,7 @@ const resumeLink =
             class="bg-white shadow-xl"
             width="100%"
             height="800px"
-            src="https://docs.google.com/document/d/e/2PACX-1vTXIHHD4NuQLXrSOJheUW6R-fJIKDrvt0R8VE5o9E1VmP7jTYybQziw01PC45jvAtM3-WP9CzqyRjXc/pub?embedded=true"
+            src={resumeLink}
           ></iframe>
         </div>
       </div>

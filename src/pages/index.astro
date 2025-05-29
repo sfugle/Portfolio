@@ -1,13 +1,16 @@
 ---
 import LayoutPage from "@layouts/LayoutPage.astro";
-
+import { Image } from 'astro:assets';
+import PortraitMobile from 'public/hero-mobile.png'
+import Portrait from 'public/hero.png'
+import Blank from 'public/blank.png'
 const cdnBaseUrl: string =
   "https://d1fp2fj544zz6e.cloudfront.net/endigo_design/portfolio";
 const groups = {
   "Skeleton Labs": await Astro.glob("./works/skeleton-labs/*.md"),
   "Brain & Bones": await Astro.glob("./works/brain-bones/*.md"),
   "Jackpot Rising": await Astro.glob("./works/jackpot-rising/*.md"),
-  Gaming: await Astro.glob("./works/gaming/*.md"),
+  "Gaming": await Astro.glob("./works/gaming/*.md"),
 };
 ---
 
@@ -17,17 +20,17 @@ const groups = {
     class="bg-primary p-4 md:p-6 !pb-0 flex flex-col items-center gap-4 md:gap-6"
   >
     <h1 class="max-w-[1200px] mx-auto text-balance text-center">
-      Hi, I’m Chris. I build design systems, accessible UI, UX, games, and more.
+      Hi, I’m Sebastian. I build intuitive games and user-focused applications.
     </h1>
-    <img
+    <Image
       class="md:hidden"
-      src="/hero-mobile.png"
-      alt="Portrait of Chris Simmons"
+      src={PortraitMobile}
+      alt="Portrait of Sebastian Fugle"
     />
-    <img
+    <Image
       class="hidden md:block"
-      src="/hero.png"
-      alt="Portrait of Chris Simmons"
+      src={Portrait}
+      alt="Portrait of Sebastian Fugle"
     />
   </header>
   <!-- Main -->
@@ -74,8 +77,11 @@ const groups = {
                     .map((work: any) => (
                       <a href={work.url}>
                         <figure class="space-y-2">
-                          <img
-                            src={cdnBaseUrl + work.frontmatter.thumbnail}
+                          <!-- {cdnBaseUrl + work.frontmatter.thumbnail} -->
+                          <Image
+                            src= {cdnBaseUrl + work.frontmatter.thumbnail}
+                            width="512px"
+                            height="512px"
                             alt={work.frontmatter.title}
                             class="w-full aspect-square rounded shadow-xl hover:scale-[98%] hover:shadow transition-transform"
                             style={{ backgroundColor: work.frontmatter.accent }}
@@ -96,3 +102,4 @@ const groups = {
     </div>
   </main>
 </LayoutPage>
+
