@@ -1,4 +1,4 @@
-# Endigo Design
+# Personal Portfolio
 
 The portfolio website of Sebastian Fugle, built of off ["Endigo Design"](https://github.com/endigo9740/endigo-design) by Chris Simmons.
 
