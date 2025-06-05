@@ -1,6 +1,6 @@
 # Endigo Design
 
-The portfolio website of Chris Simmons.
+The portfolio website of Sebastian Fugle, built of off ["Endigo Design"](https://github.com/endigo9740/endigo-design) by Chris Simmons.
 
 ## Astro
 
