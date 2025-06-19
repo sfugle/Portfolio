@@ -1,16 +1,12 @@
 ---
 import LayoutPage from "@layouts/LayoutPage.astro";
 import { Image } from 'astro:assets';
+import { getCollection } from "astro:content";
 import PortraitMobile from 'public/hero-mobile.png'
 import Portrait from 'public/hero.png'
-import Blank from 'public/blank.png'
-const cdnBaseUrl: string =
-  "https://d1fp2fj544zz6e.cloudfront.net/endigo_design/portfolio";
-const groups = {
-  "Skeleton Labs": await Astro.glob("./works/skeleton-labs/*.md"),
-  "Brain & Bones": await Astro.glob("./works/brain-bones/*.md"),
-  "Jackpot Rising": await Astro.glob("./works/jackpot-rising/*.md"),
-  "Gaming": await Astro.glob("./works/gaming/*.md"),
+const groups = { // order in here defines order on the page
+   "Programming": await Astro.glob("./works/programming/*.md"),
+  // "Unity": await Astro.glob("./works/unity/*.md"),
 };
 ---
 
@@ -19,7 +15,7 @@ const groups = {
   <header
     class="bg-primary p-4 md:p-6 !pb-0 flex flex-col items-center gap-4 md:gap-6"
   >
-    <h1 class="max-w-[1200px] mx-auto text-balance text-center">
+    <h1 class="max-w-[1200px] mx-auto text-balance text-center p-4 pb-8" >
       Hi, I’m Sebastian. I build intuitive games and user-focused applications.
     </h1>
     <Image
@@ -34,7 +30,7 @@ const groups = {
     />
   </header>
   <!-- Main -->
-  <main class="p-4 py-12 md:py-24">
+  <main class="p-4 py-24 md:py-24">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-[48px_auto_1fr] gap-4 md:gap-8">
         <!-- Heading -->
@@ -68,30 +64,51 @@ const groups = {
                   {group}
                   <span class="text-primary font-bold">{"]"}</span>
                 </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+                <div class="grid grid-cols-1 gap-4 md:gap-4">
                   {works
                     .sort(
                       (a: any, b: any) =>
                         a.frontmatter.group_id - b.frontmatter.group_id
                     )
-                    .map((work: any) => (
-                      <a href={work.url}>
-                        <figure class="space-y-2">
-                          <!-- {cdnBaseUrl + work.frontmatter.thumbnail} -->
-                          <Image
-                            src= {cdnBaseUrl + work.frontmatter.thumbnail}
-                            width="512px"
-                            height="512px"
-                            alt={work.frontmatter.title}
-                            class="w-full aspect-square rounded shadow-xl hover:scale-[98%] hover:shadow transition-transform"
-                            style={{ backgroundColor: work.frontmatter.accent }}
-                            transition:name={`${work.frontmatter.thumbnail}-thumbnail`}
-                          />
-                          <strong class="block text-center">
+                    .map((work: any, index) => (
+
+                      <figure class="space-y-2 pt-8 md:pt-4"
+                        id=`${work.frontmatter.title.toLowerCase().replace(' ', '-')}`
+                      >
+                        <!-- {cdnBaseUrl + work.frontmatter.thumbnail} -->
+                        <!--src= {`/assets/${work.frontmatter.path}/${work.frontmatter.thumbnail}`}-->
+                        <input type="checkbox" id=`button_${work.frontmatter.group}_${index}` class="hidden"/>
+                        <div class="fig-div" style={{background: work.frontmatter.thumbnails[0]}}>
+                          <h4 class="block text-center pb-2">
                             {work.frontmatter.title}
-                          </strong>
-                        </figure>
-                      </a>
+                          </h4>
+                          <label class="shelf" for=`button_${work.frontmatter.group}_${index}`>
+                            <span class="selectable">
+                              <!--{-->
+                              <!--work.frontmatter.videos.length > 0 && work.frontmatter.thumbnails.length > 0 ?-->
+                              <!--<img-->
+                              <!--  src=--background: >
+                              <!--  alt="Youtube video thumbnail"-->
+                              <!--  class="w-auto max-h-min !aspect-video"-->
+                              <!--&gt;</img> :-->
+                              <!--<img-->
+                              <!--  src={`/assets/wide.png`}-->
+                              <!--  width="1212px"-->
+                              <!--  height="512px"-->
+                              <!--  alt={work.frontmatter.title}-->
+                              <!--  class="w-full rounded transition-transform"-->
+                              <!--  style={{ backgroundColor: work.frontmatter.accent }}-->
+                              <!--/>-->
+                              <!--}-->
+                              <a href={work.url}
+                                 class="relative float-right text-primary uppercase text-lg
+                                 opacity-30 bottom-[2em] right-[1.3em] hover:right-[0.75em] ">
+                                learn more &rarr;
+                              </a>
+                            </span>
+                          </label>
+                        </div>
+                      </figure>
                     ))}
                 </div>
               </section>

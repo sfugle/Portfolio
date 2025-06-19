@@ -8,7 +8,7 @@ export default {
 				primary: 'rgb(243 239 248 / <alpha-value>)',
 				secondary: 'rgb(42 159 168 / <alpha-value>)',
 				tertiary: 'rgb(94 73 85 / <alpha-value>)',
-				surface: 'rgb(42 43 42 / <alpha-value>)'
+				surface: 'rgb(38 38 50 / <alpha-value>)'
 			}
 		},
 	},

@@ -1,5 +1,6 @@
 ---
 const pathname = new URL(Astro.request.url).pathname;
+const page = new URL(Astro.request.url).pathname.split('/').pop()
 
 const links = [
   { href: "/", label: "Works" },
@@ -30,7 +31,7 @@ function setActiveClass(link: Record<string, string>) {
       pathname.includes("/works") ? (
         // if in works, enable Go Back
         <nav>
-          <a class="anchor" href="/">
+          <a class="anchor" href={`/#${page}`}>
             &larr; Go Back
           </a>
         </nav>

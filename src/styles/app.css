@@ -31,9 +31,11 @@ h2 {
 h3 {
   @apply text-white text-xl md:text-3xl font-light uppercase;
 }
-
+h4 {
+  @apply text-white text-lg md:text-xl font-light uppercase !text-right;
+}
 .anchor {
-  @apply opacity-75 hover:opacity-100 text-secondary;
+  @apply opacity-100 hover:opacity-75 text-secondary;
 }
 
 /* Elements --- */
@@ -48,6 +50,27 @@ h3 {
 }
 .hr-vert {
   @apply border-l-2 h-full border-white/5 bg-none max-h-[640px];
+}
+
+.selectable img {
+  @apply aspect-[7/2]
+}
+
+input:checked + div label > .selectable img{
+  @apply aspect-[5/2];
+}
+
+.fig-div {
+  @apply hover:scale-[100.4%] shadow hover:shadow-xl;
+  overflow: hidden;
+}
+
+.fig-div:hover a {
+  @apply opacity-60;
+}
+
+.fig-div:hover a:hover {
+  @apply opacity-90;
 }
 
 /* Prose --- */
