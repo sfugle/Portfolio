@@ -7,11 +7,11 @@ group: Programming
 path: unmask
 title: Unmask
 website: https://github.com/sfugle/Unmask/
-accent: "#34d399"
+accent: "#8fa7c3"
 thumbnail: logo0.png
 cta: "View Code"
 videos: ["https://www.youtube.com/watch?v=2PuFyjAs7JA"]
-background: "https://i3.ytimg.com/vi/2PuFyjAs7JA/maxresdefault.jpg"
+background: ""
 screenshots:
   [
     {

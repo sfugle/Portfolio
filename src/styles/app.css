@@ -52,17 +52,20 @@ h4 {
   @apply border-l-2 h-full border-white/5 bg-none max-h-[640px];
 }
 
-.selectable img {
+.selectable .img-container {
   @apply aspect-[7/2]
 }
 
-input:checked + div label > .selectable img{
-  @apply aspect-[5/2];
+input:checked + div label > .selectable .img-container{
+  @apply aspect-[5/2]
+}
+
+input:checked + div label > .selectable a {
+  @apply text-sm font-bold;
 }
 
 .fig-div {
   @apply hover:scale-[100.4%] shadow hover:shadow-xl;
-  overflow: hidden;
 }
 
 .fig-div:hover a {

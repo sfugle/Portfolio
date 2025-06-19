@@ -8,6 +8,31 @@ const groups = { // order in here defines order on the page
    "Programming": await Astro.glob("./works/programming/*.md"),
   // "Unity": await Astro.glob("./works/unity/*.md"),
 };
+
+function isLight(color: string) { //https://stackoverflow.com/a/12043228/16547627
+  let c = color.substring(1);      // strip #
+  let rgb = parseInt(c, 16);   // convert rrggbb to decimal
+  let r = (rgb >> 16) & 0xff;  // extract red
+  let g = (rgb >>  8) & 0xff;  // extract green
+  let b = (rgb >>  0) & 0xff;  // extract blue
+  let luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+  return (luma < 40);
+}
+
+function getYoutubeID(url: string) {
+  return url.split( /((\?v=)|(&v=)|(be\/))/g).pop()
+}
+
+function youtubeEmbed(url: string) {
+  return "https://www.youtube-nocookie.com/embed/"+getYoutubeID(url); //
+}
+
+function youtubeThumbnail(url: string) {
+  return "https://i3.ytimg.com/vi/"+getYoutubeID(url)+"/maxresdefault.jpg"
+}
+
+console.log(getYoutubeID("https://youtu.be/2PuFyjAs7JA?si=5gRjlSgSuPX4HRDt"))
 ---
 
 <LayoutPage>
@@ -32,7 +57,7 @@ const groups = { // order in here defines order on the page
   <!-- Main -->
   <main class="p-4 py-24 md:py-24">
     <div class="container mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-[48px_auto_1fr] gap-4 md:gap-8">
+      <div class="grid grid-cols-2 md:grid-cols-[48px_auto_1fr] gap-4 md:gap-8">
         <!-- Heading -->
         <h2
           class="h2 md:origin-top-right md:-rotate-[90deg] md:-translate-x-[48px] md:translate-y-[195px] md:whitespace-nowrap"
@@ -64,7 +89,7 @@ const groups = { // order in here defines order on the page
                   {group}
                   <span class="text-primary font-bold">{"]"}</span>
                 </h3>
-                <div class="grid grid-cols-1 gap-4 md:gap-4">
+                <div class="grid grid-cols-2 gap-4 md:gap-4">
                   {works
                     .sort(
                       (a: any, b: any) =>
@@ -75,34 +100,39 @@ const groups = { // order in here defines order on the page
                       <figure class="space-y-2 pt-8 md:pt-4"
                         id=`${work.frontmatter.title.toLowerCase().replace(' ', '-')}`
                       >
-                        <!-- {cdnBaseUrl + work.frontmatter.thumbnail} -->
-                        <!--src= {`/assets/${work.frontmatter.path}/${work.frontmatter.thumbnail}`}-->
                         <input type="checkbox" id=`button_${work.frontmatter.group}_${index}` class="hidden"/>
-                        <div class="fig-div" style={{background: work.frontmatter.thumbnails[0]}}>
+                        <div class="fig-div">
                           <h4 class="block text-center pb-2">
                             {work.frontmatter.title}
                           </h4>
                           <label class="shelf" for=`button_${work.frontmatter.group}_${index}`>
                             <span class="selectable">
-                              <!--{-->
-                              <!--work.frontmatter.videos.length > 0 && work.frontmatter.thumbnails.length > 0 ?-->
-                              <!--<img-->
-                              <!--  src=--background: >
-                              <!--  alt="Youtube video thumbnail"-->
-                              <!--  class="w-auto max-h-min !aspect-video"-->
-                              <!--&gt;</img> :-->
-                              <!--<img-->
-                              <!--  src={`/assets/wide.png`}-->
-                              <!--  width="1212px"-->
-                              <!--  height="512px"-->
-                              <!--  alt={work.frontmatter.title}-->
-                              <!--  class="w-full rounded transition-transform"-->
-                              <!--  style={{ backgroundColor: work.frontmatter.accent }}-->
-                              <!--/>-->
-                              <!--}-->
+                              {
+                              <div class="img-container overflow-hidden justify-center align-middle">
+                                {
+                                work.frontmatter.videos.length > 0 &&
+                                <iframe class="contain" style="grid-area: -1/-1; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                                        src={youtubeEmbed(work.frontmatter.videos[0])}
+                                        allow="autoplay; clipboard-write; encrypted-media;"
+                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                }
+                                <img
+                                  src= {work.frontmatter.videos.length > 0 ? youtubeThumbnail(work.frontmatter.videos[0]) : work.frontmatter.background}
+                                  width="auto"
+                                  height="auto"
+                                  alt={work.frontmatter.title}
+                                  class="flex-auto rounded transition-transform object-contain relative h-full w-full"
+                                  style={[{ backgroundColor: work.frontmatter.accent }, 'grid-area: 1/-1']}
+                                />
+
+                              </div>
+                              }
                               <a href={work.url}
-                                 class="relative float-right text-primary uppercase text-lg
-                                 opacity-30 bottom-[2em] right-[1.3em] hover:right-[0.75em] ">
+                                 class:list ={["relative float-right uppercase text-lg font-semibold",
+                                 "opacity-30 bottom-[2em] right-[1.3em] hover:right-[0.75em]",
+                                 [!isLight(work.frontmatter.accent) ? 'text-primary' : 'text-surface']
+                                 ]}
+                              >
                                 learn more &rarr;
                               </a>
                             </span>
